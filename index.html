@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YogiBuddy - Your Personal Yoga Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="yogaicon.jpg" alt="YogiBuddy Logo">
+            <span>YogiBuddy</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#poses" class="nav-link">Poses</a>
+            <a href="#health" class="nav-link">Health</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#progress" class="nav-link">Progress</a>
+        </div>
+        <div class="user-actions">
+            <span id="userEmail" style="display: none;"></span>
+            <button id="logoutBtn" class="btn-small" style="display: none;">Logout</button>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+    <!-- Login Page -->
+    <div id="login-page" class="login-container" style="display: none;">
+        <div class="login-box">
+            <h2>Welcome to YogiBuddy</h2>
+            <p>Please login to continue</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p class="signup-link">Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+            </form>
+        </div>
+
+        <div class="signup-box" style="display: none;">
+            <h2>Create Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirm">Confirm Password</label>
+                    <input type="password" id="signupConfirm" required>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <p class="login-link">Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Page -->
+        <section id="home">
+            <div class="hero">
+                <h1>Welcome to YogiBuddy</h1>
+                <p>Your personal yoga guide for a healthier, happier life. Get personalized routines, expert advice, and track your progress.</p>
+                <button class="btn" onclick="navigateTo('poses')">Start Your Journey</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🧘</div>
+                    <h3>Daily Routines</h3>
+                    <p>Get customized yoga sequences based on your goals and experience level.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3>Pose Library</h3>
+                    <p>Learn proper form with step-by-step instructions for hundreds of poses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your improvements and celebrate your achievements.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Mindfulness</h3>
+                    <p>Guided meditations and breathing exercises for mental wellbeing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Poses Page -->
+        <section id="poses" style="display: none;">
+            <div class="poses-container">
+                <div class="poses-sidebar">
+                    <h2>Yoga Poses</h2>
+                    <div class="search-box">
+                        <input type="text" id="poseSearch" placeholder="Search poses..." onkeyup="searchPoses()">
+                    </div>
+                    <ul class="pose-list" id="poseList">
+                        <!-- Pose items will be dynamically added here -->
+                    </ul>
+                </div>
+                <div class="pose-details" id="poseDetails">
+                    <div class="pose-placeholder">
+                        <h2>Select a Pose</h2>
+                        <p>Choose a yoga pose from the sidebar to view detailed instructions and benefits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Health Page Section -->
+        <section id="health" style="display: none;">
+            <div class="health-form">
+                <h2>Your Health Profile</h2>
+                
+                <!-- Profile Form -->
+                <form id="healthForm">
+                    <!-- Personal Information -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="entry.1284119771" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="entry.1672346148" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Physical Attributes -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="entry.26451197" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" name="entry.1801023822" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" id="height" name="entry.562400821" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bp">Blood Pressure</label>
+                            <input type="text" id="bp" name="entry.966334697" class="form-control" placeholder="e.g., 120/80">
+                        </div>
+                    </div>
+                    
+                    <!-- Yoga Information -->
+                    <div class="form-group">
+                        <label for="goals">Yoga Goals</label>
+                        <select id="goals" name="entry.937767645" class="form-control" required>
+                            <option value="">Select your primary goal</option>
+                            <option value="Flexibility">Improve Flexibility</option>
+                            <option value="Build Strength">Build Strength</option>
+                            <option value="Stress Relief">Stress Relief</option>
+                            <option value="Weight Management">Weight Management</option>
+                            <option value="Balance">Improve Balance</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Health Information -->
+                    <div class="form-group">
+                        <label for="diseases">Existing Medical Conditions</label>
+                        <textarea id="diseases" name="entry.849450230" class="form-control" rows="3" placeholder="List any medical conditions"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medications">Current Medications</label>
+                        <textarea id="medications" name="entry.1757294836" class="form-control" rows="3" placeholder="List any medications"></textarea>
+                    </div>
+                    
+                    <!-- Experience Level -->
+                    <div class="form-group">
+                        <label for="experience">Yoga Experience Level</label>
+                        <select id="experience" name="entry.694242634" class="form-control">
+                            <option value="None">None</option>
+                            <option value="Beginner">Beginner (less than 6 months)</option>
+                            <option value="Intermediate">Intermediate (6 months - 2 years)</option>
+                            <option value="Advanced">Advanced (more than 2 years)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <button type="submit" class="btn">Save Health Profile</button>
+                </form>
+            </div>
+        </section>
+                    
+        <!-- FAQ Page -->
+        <section id="faq" style="display: none;">
+            <div class="faq-container">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-categories">
+                    <button class="faq-category-btn active" onclick="filterFAQs('all')">All</button>
+                    <button class="faq-category-btn" onclick="filterFAQs('general')">General</button>
+                    <button class="faq-category-btn" onclick="filterFAQs('health')">Health</button>
+                    <button class="faq-category-btn" onclick="filterFAQs('poses')">Poses</button>
+                    <button class="faq-category-btn" onclick="filterFAQs('injuries')">Injuries</button>
+                </div>
+                
+                <div class="faq-list" id="faqList">
+                    <!-- FAQ items will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Page -->
+        <section id="progress" style="display: none;">
+            <div class="progress-container">
+                <h2>Your Yoga Journey</h2>
+                
+                <div class="progress-stats">
+                    <div class="stat-card">
+                        <h3>Current Streak</h3>
+                        <p class="stat-value" id="currentStreak">0 days</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Sessions</h3>
+                        <p class="stat-value" id="totalSessions">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Favorite Pose</h3>
+                        <p class="stat-value" id="favoritePose">-</p>
+                    </div>
+                </div>
+                
+                <h3>Recent Achievements</h3>
+                <div class="achievements-list" id="achievementsList">
+                    <!-- Achievements will be dynamically added here -->
+                </div>
+                
+                <h3>Weekly Progress</h3>
+                <div class="progress-chart">
+                    <div class="chart-bars">
+                        <div class="chart-bar" style="height: 30%;"><span>Mon</span></div>
+                        <div class="chart-bar" style="height: 50%;"><span>Tue</span></div>
+                        <div class="chart-bar" style="height: 70%;"><span>Wed</span></div>
+                        <div class="chart-bar" style="height: 90%;"><span>Thu</span></div>
+                        <div class="chart-bar" style="height: 60%;"><span>Fri</span></div>
+                        <div class="chart-bar" style="height: 80%;"><span>Sat</span></div>
+                        <div class="chart-bar" style="height: 100%;"><span>Sun</span></div>
+                    </div>
+                </div>
+                
+                <button class="btn" style="width: 100%; margin-top: 2rem;">View Full Progress Report</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
+        <div class="chatbot-window">
+            <div class="chatbot-header">
+                <h3>YogiBot</h3>
+                <span onclick="toggleChatbot()" style="cursor: pointer;">×</span>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">Namaste! I'm YogiBot. How can I help you with your yoga practice today?</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Ask me anything about yoga..." id="chatbotInput" onkeypress="handleChatInput(event)">
+                <button onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About YogiBuddy</h3>
+                <p>Your personal yoga companion for a healthier lifestyle. We provide customized yoga routines, pose guidance, and progress tracking.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">🐦</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#home" class="footer-link">Home</a></p>
+                <p><a href="#poses" class="footer-link">Yoga Poses</a></p>
+                <p><a href="#health" class="footer-link">Health Profile</a></p>
+                <p><a href="#faq" class="footer-link">FAQ</a></p>
+                <p><a href="#progress" class="footer-link">Progress Tracking</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@yogibuddy.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Yoga Lane, Wellness City</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 YogiBuddy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="custom_common.js"></script>
+</body>
+</html>

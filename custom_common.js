@@ -1,5 +1,5 @@
 
-const API_KEY = 'AIzaSyDj9PTKW4D4cUMeQZJAwTUpm_TBKXpbQOk'; // 🚨 For testing only
+const API_KEY = '#YOUR API KEY '; // 🚨 For testing only
 
 function toggleChatbot() {
     const window = document.querySelector(".chatbot-window");
